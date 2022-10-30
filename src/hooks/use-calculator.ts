@@ -54,7 +54,14 @@ export const useCalculator = () => {
   }, [leftValue, operator, rightValue, updateResult]);
 
   const handleInvert = useCallback(() => {
-    updateResult(`${Number(rightValue ?? leftValue) * -1}`);
+    const valueToInvert = rightValue ?? leftValue ?? "0";
+
+    // We can't just multiply by -1 because in JS, the number -0 is "0" when stringified
+    const invertedValue = valueToInvert.startsWith("-")
+      ? valueToInvert.slice(1)
+      : `-${valueToInvert}`;
+
+    updateResult(invertedValue);
   }, [leftValue, rightValue, updateResult]);
 
   const handlePercent = useCallback(() => {
