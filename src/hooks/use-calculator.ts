@@ -57,15 +57,15 @@ export const useCalculator = () => {
     const valueToInvert = rightValue ?? leftValue ?? "0";
 
     // We can't just multiply by -1 because in JS, the number -0 is "0" when stringified
-    const invertedValue = valueToInvert.startsWith("-")
-      ? valueToInvert.slice(1)
-      : `-${valueToInvert}`;
+    const inverted = valueToInvert.startsWith("-") ? valueToInvert.slice(1) : `-${valueToInvert}`;
 
-    updateResult(invertedValue);
+    updateResult(inverted);
   }, [leftValue, rightValue, updateResult]);
 
   const handlePercent = useCallback(() => {
-    updateResult(`${Number(rightValue ?? leftValue) / 100}`);
+    const percent = `${Number(rightValue ?? leftValue ?? "0") / 100}`;
+
+    updateResult(percent);
   }, [leftValue, rightValue, updateResult]);
 
   const handleKeyDown = useCallback(
