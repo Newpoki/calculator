@@ -1,0 +1,38 @@
+.calculator {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  &--screen {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10px 34px;
+
+    &--result {
+      color: white;
+      font-size: 90px;
+    }
+  }
+
+  &--buttons {
+    display: grid;
+    gap: 14px;
+    justify-content: center;
+    padding: 14px;
+
+    &--row {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, 1fr);
+
+      &--last {
+        @extend .calculator--buttons--row;
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+  }
+}

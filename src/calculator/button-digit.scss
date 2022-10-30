@@ -1,0 +1,12 @@
+.digit {
+  color: white;
+  background-color: #333333;
+
+  &--zero {
+    @extend .digit;
+    width: 100%;
+    border-radius: 352px;
+    text-align: left;
+    padding-left: 32px;
+  }
+}
