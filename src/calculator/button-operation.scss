@@ -1,10 +1,20 @@
+$main: rgba(241, 163, 59, 1);
+$secondary: #ffffff;
+$main-low-opacity: rgba(179, 144, 98, 1);
+
 .operation {
-  color: white;
-  background-color: #f1a33b;
-  transition: 0.3s;
+  color: $secondary;
+  background-color: $main;
+  transition-duration: 0.3s;
+  transition-property: background-color, color;
 
   &.selected {
-    background-color: white;
-    color: #f1a33b;
+    background-color: $secondary;
+    color: $main;
+  }
+
+  &:active,
+  &.selected:active {
+    background-color: $main-low-opacity;
   }
 }

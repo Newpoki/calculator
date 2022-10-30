@@ -1,4 +1,9 @@
 .tool {
   color: black;
   background-color: #a5a5a5;
+  transition: 0.3s background-color;
+
+  &:active {
+    background-color: #c9c9c9;
+  }
 }

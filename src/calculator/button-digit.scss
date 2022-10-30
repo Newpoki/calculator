@@ -1,6 +1,7 @@
 .digit {
   color: white;
   background-color: #333333;
+  transition: 0.3s background-color;
 
   &--zero {
     @extend .digit;
@@ -9,5 +10,9 @@
     text-align: left;
     padding-left: 32px;
     flex: 2;
+  }
+
+  &:active {
+    background-color: #7e7e7e;
   }
 }
