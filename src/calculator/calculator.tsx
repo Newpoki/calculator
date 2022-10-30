@@ -101,7 +101,7 @@ export const Calculator = () => {
           </ButtonOperation>
         </div>
 
-        <div className="calculator--buttons--row--last">
+        <div className="calculator--buttons--row">
           <ButtonDigit value={DIGITS_WITH_SEP.ZERO} onClick={onDigitClick}>
             0
           </ButtonDigit>

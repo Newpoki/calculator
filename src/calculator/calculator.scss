@@ -11,6 +11,7 @@
     align-items: flex-end;
     justify-content: flex-end;
     padding: 10px 34px;
+    padding-top: 0;
 
     &--result {
       color: white;
@@ -20,19 +21,13 @@
 
   &--buttons {
     display: grid;
-    gap: 14px;
+    gap: 4vw;
     justify-content: center;
-    padding: 14px;
+    padding: 4vw;
 
     &--row {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(4, 1fr);
-
-      &--last {
-        @extend .calculator--buttons--row;
-        grid-template-columns: 2fr 1fr 1fr;
-      }
+      display: flex;
+      gap: 4vw;
     }
   }
 }
