@@ -1,13 +1,13 @@
 import clsx from "clsx";
-import { ButtonDigit } from "./button-digit";
-import { ButtonOperation } from "./button-operation";
-import { ButtonTool } from "./button-tool";
-import { DIGITS, DIGIT_SEP, OPERATORS, TOOLS } from "./calculator-constants";
-import { useIOSCalculator } from "./use-iOS-calculator";
+import { DIGITS, DIGIT_SEP, OPERATORS, TOOLS } from "../../calculator/calculator-constants";
+import { useIOSCalculator } from "../hooks/use-iOS-calculator";
+import { IOSButtonDigit } from "./iOS-button-digit";
+import { IOSButtonOperator } from "./iOS-button-operator";
+import { IOSButtonTool } from "./iOS-button-tool";
 
-import "./calculator.scss";
+import "./iOS-calculator.scss";
 
-export const Calculator = () => {
+export const IOSCalculator = () => {
   const {
     displayedValue,
     resetButtonLabel,
@@ -38,35 +38,35 @@ export const Calculator = () => {
 
       <div className="calculator--buttons">
         <div className="calculator--buttons--row">
-          <ButtonTool className="reset-button" value={TOOLS.RESET} onClick={onReset}>
+          <IOSButtonTool className="reset-button" value={TOOLS.RESET} onClick={onReset}>
             {resetButtonLabel}
-          </ButtonTool>
-          <ButtonTool className="invert-button" value={TOOLS.INVERT} onClick={onInvert}>
+          </IOSButtonTool>
+          <IOSButtonTool className="invert-button" value={TOOLS.INVERT} onClick={onInvert}>
             ⁺∕₋
-          </ButtonTool>
-          <ButtonTool className="percent-button" value={TOOLS.PERCENT} onClick={onPercent}>
+          </IOSButtonTool>
+          <IOSButtonTool className="percent-button" value={TOOLS.PERCENT} onClick={onPercent}>
             %
-          </ButtonTool>
-          <ButtonOperation
+          </IOSButtonTool>
+          <IOSButtonOperator
             value={OPERATORS.DIVISION}
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.DIVISION && (!rightValue || rightValue === "0")}
           >
             &#xf7;
-          </ButtonOperation>
+          </IOSButtonOperator>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS.SEVEN} onClick={onDigitClick}>
+          <IOSButtonDigit value={DIGITS.SEVEN} onClick={onDigitClick}>
             7
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.HEIGHT} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.HEIGHT} onClick={onDigitClick}>
             8
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.NINE} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.NINE} onClick={onDigitClick}>
             9
-          </ButtonDigit>
-          <ButtonOperation
+          </IOSButtonDigit>
+          <IOSButtonOperator
             className="times-button"
             value={OPERATORS.MULTIPLICATION}
             onClick={onOperatorClick}
@@ -75,55 +75,55 @@ export const Calculator = () => {
             }
           >
             &#xd7;
-          </ButtonOperation>
+          </IOSButtonOperator>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS.FOUR} onClick={onDigitClick}>
+          <IOSButtonDigit value={DIGITS.FOUR} onClick={onDigitClick}>
             4
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.FIVE} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.FIVE} onClick={onDigitClick}>
             5
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.SIX} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.SIX} onClick={onDigitClick}>
             6
-          </ButtonDigit>
-          <ButtonOperation
+          </IOSButtonDigit>
+          <IOSButtonOperator
             value={OPERATORS.SUBSTRACTION}
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.SUBSTRACTION && (!rightValue || rightValue === "0")}
           >
             &minus;
-          </ButtonOperation>
+          </IOSButtonOperator>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS.ONE} onClick={onDigitClick}>
+          <IOSButtonDigit value={DIGITS.ONE} onClick={onDigitClick}>
             1
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.TWO} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.TWO} onClick={onDigitClick}>
             2
-          </ButtonDigit>
-          <ButtonDigit value={DIGITS.THREE} onClick={onDigitClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGITS.THREE} onClick={onDigitClick}>
             3
-          </ButtonDigit>
-          <ButtonOperation
+          </IOSButtonDigit>
+          <IOSButtonOperator
             value={OPERATORS.ADDITION}
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.ADDITION && (!rightValue || rightValue === "0")}
           >
             &#x2b;
-          </ButtonOperation>
+          </IOSButtonOperator>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS.ZERO} onClick={onDigitClick}>
+          <IOSButtonDigit value={DIGITS.ZERO} onClick={onDigitClick}>
             0
-          </ButtonDigit>
-          <ButtonDigit value={DIGIT_SEP} onClick={onSepClick}>
+          </IOSButtonDigit>
+          <IOSButtonDigit value={DIGIT_SEP} onClick={onSepClick}>
             ,
-          </ButtonDigit>
-          <ButtonOperation onClick={onCalc}>&#x3d;</ButtonOperation>
+          </IOSButtonDigit>
+          <IOSButtonOperator onClick={onCalc}>&#x3d;</IOSButtonOperator>
         </div>
       </div>
     </main>

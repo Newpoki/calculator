@@ -1,9 +1,9 @@
-import { Calculator } from "./calculator/calculator";
+import { IOSCalculator } from "./iOS-calculator/components/iOS-calculator";
 
 export const App = () => {
   return (
     <div>
-      <Calculator />
+      <IOSCalculator />
     </div>
   );
 };

@@ -1,19 +1,19 @@
 import clsx from "clsx";
 import { ReactNode, useCallback } from "react";
-import { Button } from "./button";
+import { Operator } from "../../calculator/calculator-types";
+import { IOSButton } from "./iOS-button";
 
-import "./button-operation.scss";
-import { Operation } from "./calculator-types";
+import "./iOS-button-operator.scss";
 
 type Props = {
   children: ReactNode;
   className?: string;
   isSelected?: boolean;
-  onClick: (value: Operation | undefined) => void;
-  value?: Operation;
+  onClick: (value: Operator | undefined) => void;
+  value?: Operator;
 };
 
-export const ButtonOperation = ({
+export const IOSButtonOperator = ({
   children,
   className,
   isSelected = false,
@@ -25,11 +25,11 @@ export const ButtonOperation = ({
   }, [onClick, value]);
 
   return (
-    <Button
-      className={clsx("operation", className, { selected: isSelected })}
+    <IOSButton
+      className={clsx("operator", className, { selected: isSelected })}
       onClick={handleClick}
     >
       {children}
-    </Button>
+    </IOSButton>
   );
 };

@@ -1,6 +1,6 @@
-import { isEventKeyOperator } from "./../utils/is-event-key-operator";
 import { SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
-import { Operator } from "../calculator/calculator-types";
+import { isEventKeyOperator } from "../../utils/is-event-key-operator";
+import { Operator } from "../calculator-types";
 
 export const useCalculator = () => {
   const [leftValue, setLeftValue] = useState<string | undefined>(undefined);

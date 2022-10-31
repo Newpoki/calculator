@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { MouseEvent, ReactNode, useCallback } from "react";
-import "./button.scss";
+
+import "./iOS-button.scss";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +9,7 @@ type Props = {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Button = ({ children, className, onClick }: Props) => {
+export const IOSButton = ({ children, className, onClick }: Props) => {
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       onClick(event);

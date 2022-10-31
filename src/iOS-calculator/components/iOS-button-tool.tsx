@@ -1,9 +1,9 @@
 import { ReactNode, useCallback } from "react";
-import { Button } from "./button";
-import { Tool } from "./calculator-types";
-
-import "./button-tool.scss";
+import { IOSButton } from "./iOS-button";
 import clsx from "clsx";
+import { Tool } from "../../calculator/calculator-types";
+
+import "./iOS-button-tool.scss";
 
 type Props = {
   children: ReactNode;
@@ -12,14 +12,14 @@ type Props = {
   value: Tool;
 };
 
-export const ButtonTool = ({ children, className, onClick, value }: Props) => {
+export const IOSButtonTool = ({ children, className, onClick, value }: Props) => {
   const handleClick = useCallback(() => {
     onClick(value);
   }, [onClick, value]);
 
   return (
-    <Button className={clsx("tool", className)} onClick={handleClick}>
+    <IOSButton className={clsx("tool", className)} onClick={handleClick}>
       {children}
-    </Button>
+    </IOSButton>
   );
 };

@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { ReactNode, useCallback } from "react";
-import { Button } from "./button";
+import { IOSButton } from "./iOS-button";
+import { DIGITS, DIGIT_SEP } from "../../calculator/calculator-constants";
+import { Digit } from "../../calculator/calculator-types";
 
-import "./button-digit.scss";
-import { DIGITS, DIGIT_SEP } from "./calculator-constants";
-import { Digit } from "./calculator-types";
+import "./iOS-button-digit.scss";
 
 type DigitWithSep = Digit | typeof DIGIT_SEP;
 
@@ -14,17 +14,17 @@ type Props = {
   value: DigitWithSep;
 };
 
-export const ButtonDigit = ({ children, onClick, value }: Props) => {
+export const IOSButtonDigit = ({ children, onClick, value }: Props) => {
   const handleClick = useCallback(() => {
     onClick(value);
   }, [onClick, value]);
 
   return (
-    <Button
+    <IOSButton
       className={clsx("digit", { "digit--zero": value === DIGITS.ZERO })}
       onClick={handleClick}
     >
       {children}
-    </Button>
+    </IOSButton>
   );
 };

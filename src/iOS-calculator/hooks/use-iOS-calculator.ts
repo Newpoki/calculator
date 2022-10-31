@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useCalculator } from "../hooks/use-calculator";
-import { calc } from "../utils/calc";
-import { isEventKeyDigit } from "../utils/is-event-key-digit";
-import { DIGITS, DIGIT_SEP } from "./calculator-constants";
-import { DigitWithSep } from "./calculator-types";
+import { DIGITS, DIGIT_SEP } from "../../calculator/calculator-constants";
+import { DigitWithSep } from "../../calculator/calculator-types";
+import { useCalculator } from "../../calculator/hooks/use-calculator";
+import { calc } from "../../utils/calc";
+import { isEventKeyDigit } from "../../utils/is-event-key-digit";
 
 export const IOS_RESET_BUTTON_LABEL = {
   AC: "AC",
