@@ -1,35 +1,18 @@
 import { isEventKeyOperator } from "./../utils/is-event-key-operator";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { DigitWithSepValue, Operation } from "../calculator/calculator-types";
-import { calc } from "../utils/calc";
-import { isEventKeyDigitOrDecSep } from "../utils/is-event-key-digit";
+import { SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
+import { Operator } from "../calculator/calculator-types";
 
 export const useCalculator = () => {
   const [leftValue, setLeftValue] = useState<string | undefined>(undefined);
   const [rightValue, setRightValue] = useState<string | undefined>(undefined);
-  const [operator, setOperator] = useState<Operation | undefined>(undefined);
-
-  const displayedValue = useMemo(() => {
-    return rightValue ?? leftValue ?? "0";
-  }, [leftValue, rightValue]);
+  const [operator, setOperator] = useState<Operator | undefined>(undefined);
 
   const handleClickDigit = useCallback(
-    (value: DigitWithSepValue) => {
-      const getUpdatedValue = (current: string | undefined) =>
-        !current ? value : `${current}${value}`;
-
-      operator ? setRightValue(getUpdatedValue) : setLeftValue(getUpdatedValue);
+    (value: SetStateAction<string | undefined>) => {
+      operator ? setRightValue(value) : setLeftValue(value);
     },
     [operator]
   );
-
-  const handleClickOperation = useCallback((value: Operation | undefined) => {
-    if (!value) {
-      return;
-    }
-
-    setOperator(value);
-  }, []);
 
   const handleReset = useCallback(() => {
     setLeftValue(undefined);
@@ -42,16 +25,6 @@ export const useCalculator = () => {
     setRightValue(undefined);
     setOperator(undefined);
   }, []);
-
-  const handleCalc = useCallback(() => {
-    if (!leftValue || !operator) {
-      return;
-    }
-
-    const result = calc(leftValue, operator, rightValue);
-
-    updateResult(result);
-  }, [leftValue, operator, rightValue, updateResult]);
 
   const handleInvert = useCallback(() => {
     const value = rightValue ?? leftValue ?? "0";
@@ -84,20 +57,8 @@ export const useCalculator = () => {
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (isEventKeyDigitOrDecSep(event.key)) {
-        handleClickDigit(event.key);
-      }
-
       if (isEventKeyOperator(event.key)) {
-        handleClickOperation(event.key);
-      }
-
-      if (event.key === "Enter") {
-        handleCalc();
-      }
-
-      if (event.key === "Escape") {
-        handleReset();
+        setOperator(event.key);
       }
 
       if (event.key === "%") {
@@ -108,7 +69,7 @@ export const useCalculator = () => {
         handleCancel();
       }
     },
-    [handleCalc, handleCancel, handleClickDigit, handleClickOperation, handlePercent, handleReset]
+    [handleCancel, setOperator, handlePercent]
   );
 
   useEffect(() => {
@@ -121,24 +82,27 @@ export const useCalculator = () => {
 
   return useMemo(
     () => ({
-      displayedValue,
+      leftValue,
       operator,
+      rightValue,
       onDigitClick: handleClickDigit,
-      onOperatorClick: handleClickOperation,
+      onOperatorClick: setOperator,
       onReset: handleReset,
-      onCalc: handleCalc,
       onPercent: handlePercent,
       onInvert: handleInvert,
+      onRightValueChange: setRightValue,
+      setLeftValue,
+      setRightValue,
     }),
     [
-      displayedValue,
-      handleCalc,
       handleClickDigit,
-      handleClickOperation,
+      setOperator,
       handleInvert,
       handlePercent,
       handleReset,
+      leftValue,
       operator,
+      rightValue,
     ]
   );
 };

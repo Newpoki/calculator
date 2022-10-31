@@ -1,4 +1,4 @@
-const DIGITS = {
+export const DIGITS = {
   ZERO: "0",
   ONE: "1",
   TWO: "2",
@@ -11,9 +11,9 @@ const DIGITS = {
   NINE: "9",
 } as const;
 
-export const DIGITS_WITH_SEP = { ...DIGITS, SEP: "," } as const;
+export const DIGIT_SEP = "," as const;
 
-export const DIGITS_LIST_WITH_SEP = Object.values(DIGITS_WITH_SEP);
+export const DIGITS_LIST = Object.values(DIGITS);
 
 export const OPERATORS = {
   DIVISION: "/",

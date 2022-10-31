@@ -3,13 +3,15 @@ import { ReactNode, useCallback } from "react";
 import { Button } from "./button";
 
 import "./button-digit.scss";
-import { DIGITS_WITH_SEP } from "./calculator-constants";
-import { DigitWithSepValue } from "./calculator-types";
+import { DIGITS, DIGIT_SEP } from "./calculator-constants";
+import { Digit } from "./calculator-types";
+
+type DigitWithSep = Digit | typeof DIGIT_SEP;
 
 type Props = {
   children: ReactNode;
-  onClick: (value: DigitWithSepValue) => void;
-  value: DigitWithSepValue;
+  onClick: (value: DigitWithSep) => void;
+  value: DigitWithSep;
 };
 
 export const ButtonDigit = ({ children, onClick, value }: Props) => {
@@ -19,7 +21,7 @@ export const ButtonDigit = ({ children, onClick, value }: Props) => {
 
   return (
     <Button
-      className={clsx("digit", { "digit--zero": value === DIGITS_WITH_SEP.ZERO })}
+      className={clsx("digit", { "digit--zero": value === DIGITS.ZERO })}
       onClick={handleClick}
     >
       {children}

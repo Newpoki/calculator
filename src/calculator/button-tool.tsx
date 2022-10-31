@@ -1,6 +1,6 @@
 import { ReactNode, useCallback } from "react";
 import { Button } from "./button";
-import { ToolValue } from "./calculator-types";
+import { Tool } from "./calculator-types";
 
 import "./button-tool.scss";
 import clsx from "clsx";
@@ -8,8 +8,8 @@ import clsx from "clsx";
 type Props = {
   children: ReactNode;
   className?: string;
-  onClick: (value: ToolValue) => void;
-  value: ToolValue;
+  onClick: (value: Tool) => void;
+  value: Tool;
 };
 
 export const ButtonTool = ({ children, className, onClick, value }: Props) => {

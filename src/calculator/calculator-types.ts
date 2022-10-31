@@ -1,15 +1,15 @@
-import { DIGITS_WITH_SEP, OPERATORS, TOOLS } from "./calculator-constants";
+import { DIGITS, DIGIT_SEP, OPERATORS, TOOLS } from "./calculator-constants";
 
-export type Operation = "/" | "*" | "-" | "+";
+type DigitKey = keyof typeof DIGITS;
 
-type DigitWithSepKey = keyof typeof DIGITS_WITH_SEP;
+export type Digit = `${typeof DIGITS[DigitKey]}`;
 
-export type DigitWithSepValue = `${typeof DIGITS_WITH_SEP[DigitWithSepKey]}`;
+export type DigitWithSep = Digit | typeof DIGIT_SEP;
 
 type OperatorKey = keyof typeof OPERATORS;
 
-export type OperatorValue = `${typeof OPERATORS[OperatorKey]}`;
+export type Operator = `${typeof OPERATORS[OperatorKey]}`;
 
 type ToolKey = keyof typeof TOOLS;
 
-export type ToolValue = `${typeof TOOLS[ToolKey]}`;
+export type Tool = `${typeof TOOLS[ToolKey]}`;

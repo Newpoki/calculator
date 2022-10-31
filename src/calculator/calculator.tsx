@@ -1,17 +1,17 @@
 import clsx from "clsx";
-import { useCallback } from "react";
-import { useCalculator } from "../hooks/use-calculator";
 import { ButtonDigit } from "./button-digit";
 import { ButtonOperation } from "./button-operation";
 import { ButtonTool } from "./button-tool";
-import { DIGITS_WITH_SEP, OPERATORS, TOOLS } from "./calculator-constants";
-import { DigitWithSepValue } from "./calculator-types";
+import { DIGITS, DIGIT_SEP, OPERATORS, TOOLS } from "./calculator-constants";
+import { useIOSCalculator } from "./use-iOS-calculator";
 
 import "./calculator.scss";
 
 export const Calculator = () => {
   const {
     displayedValue,
+    resetButtonLabel,
+    rightValue,
     operator,
     onCalc,
     onDigitClick,
@@ -19,19 +19,8 @@ export const Calculator = () => {
     onReset,
     onInvert,
     onPercent,
-  } = useCalculator();
-
-  const handleDigitClick = useCallback(
-    (value: DigitWithSepValue) => {
-      // iOS calculator doesn't allow more than 9 chars
-      if (displayedValue.length === 9) {
-        return;
-      }
-
-      onDigitClick(value);
-    },
-    [displayedValue.length, onDigitClick]
-  );
+    onSepClick,
+  } = useIOSCalculator();
 
   return (
     <main className="calculator">
@@ -50,7 +39,7 @@ export const Calculator = () => {
       <div className="calculator--buttons">
         <div className="calculator--buttons--row">
           <ButtonTool className="reset-button" value={TOOLS.RESET} onClick={onReset}>
-            AC
+            {resetButtonLabel}
           </ButtonTool>
           <ButtonTool className="invert-button" value={TOOLS.INVERT} onClick={onInvert}>
             ⁺∕₋
@@ -61,75 +50,77 @@ export const Calculator = () => {
           <ButtonOperation
             value={OPERATORS.DIVISION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.DIVISION}
+            isSelected={operator === OPERATORS.DIVISION && (!rightValue || rightValue === "0")}
           >
             &#xf7;
           </ButtonOperation>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.SEVEN} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.SEVEN} onClick={onDigitClick}>
             7
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.HEIGHT} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.HEIGHT} onClick={onDigitClick}>
             8
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.NINE} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.NINE} onClick={onDigitClick}>
             9
           </ButtonDigit>
           <ButtonOperation
             className="times-button"
             value={OPERATORS.MULTIPLICATION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.MULTIPLICATION}
+            isSelected={
+              operator === OPERATORS.MULTIPLICATION && (!rightValue || rightValue === "0")
+            }
           >
             &#xd7;
           </ButtonOperation>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.FOUR} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.FOUR} onClick={onDigitClick}>
             4
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.FIVE} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.FIVE} onClick={onDigitClick}>
             5
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.SIX} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.SIX} onClick={onDigitClick}>
             6
           </ButtonDigit>
           <ButtonOperation
             value={OPERATORS.SUBSTRACTION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.SUBSTRACTION}
+            isSelected={operator === OPERATORS.SUBSTRACTION && (!rightValue || rightValue === "0")}
           >
             &minus;
           </ButtonOperation>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.ONE} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.ONE} onClick={onDigitClick}>
             1
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.TWO} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.TWO} onClick={onDigitClick}>
             2
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.THREE} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.THREE} onClick={onDigitClick}>
             3
           </ButtonDigit>
           <ButtonOperation
             value={OPERATORS.ADDITION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.ADDITION}
+            isSelected={operator === OPERATORS.ADDITION && (!rightValue || rightValue === "0")}
           >
             &#x2b;
           </ButtonOperation>
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.ZERO} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGITS.ZERO} onClick={onDigitClick}>
             0
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.SEP} onClick={handleDigitClick}>
+          <ButtonDigit value={DIGIT_SEP} onClick={onSepClick}>
             ,
           </ButtonDigit>
           <ButtonOperation onClick={onCalc}>&#x3d;</ButtonOperation>
