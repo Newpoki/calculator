@@ -26,24 +26,24 @@ export const useIOSCalculator = () => {
 
   const displayedValue = useMemo(() => {
     // Even if user inputs ",", this is converted to a number in the way
-    return (rightValue ?? leftValue ?? "0").replace(".", DIGIT_SEP);
+    return (rightValue ?? leftValue ?? DIGITS.ZERO).replace(".", DIGIT_SEP);
   }, [leftValue, rightValue]);
 
   const handleDigitClick = useCallback(
     (value: DigitWithSep) => {
       // iOS calculator doesn't allow more than 9 chars
-      if (displayedValue.length === 9) {
+      if (displayedValue.length === 9 && !operator) {
         return;
       }
 
       const getUpdatedDigitValue = (current: string | undefined) => {
-        return !current || current === "0" ? value : `${current}${value}`;
+        return !current || current === DIGITS.ZERO ? value : `${current}${value}`;
       };
 
       setResetButtonLabel(IOS_RESET_BUTTON_LABEL.C);
       onDigitClick(getUpdatedDigitValue);
     },
-    [displayedValue, onDigitClick]
+    [displayedValue.length, onDigitClick, operator]
   );
 
   const handleSepClick = useCallback(() => {
@@ -65,10 +65,10 @@ export const useIOSCalculator = () => {
    * iOS reset only the rightValue if present or if there is an operator
    */
   const handleReset = useCallback(() => {
-    if (rightValue && rightValue !== "0") {
+    if (rightValue && rightValue !== DIGITS.ZERO) {
       // Setting in to zero instead of undefined to allow pressing equal
       // and not displaying the leftValue
-      setRightValue("0");
+      setRightValue(DIGITS.ZERO);
       setResetButtonLabel(IOS_RESET_BUTTON_LABEL.AC);
 
       return;

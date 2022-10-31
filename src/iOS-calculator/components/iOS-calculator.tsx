@@ -50,7 +50,9 @@ export const IOSCalculator = () => {
           <IOSButtonOperator
             value={OPERATORS.DIVISION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.DIVISION && (!rightValue || rightValue === "0")}
+            isSelected={
+              operator === OPERATORS.DIVISION && (!rightValue || rightValue === DIGITS.ZERO)
+            }
           >
             &#xf7;
           </IOSButtonOperator>
@@ -71,7 +73,7 @@ export const IOSCalculator = () => {
             value={OPERATORS.MULTIPLICATION}
             onClick={onOperatorClick}
             isSelected={
-              operator === OPERATORS.MULTIPLICATION && (!rightValue || rightValue === "0")
+              operator === OPERATORS.MULTIPLICATION && (!rightValue || rightValue === DIGITS.ZERO)
             }
           >
             &#xd7;
@@ -91,7 +93,9 @@ export const IOSCalculator = () => {
           <IOSButtonOperator
             value={OPERATORS.SUBSTRACTION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.SUBSTRACTION && (!rightValue || rightValue === "0")}
+            isSelected={
+              operator === OPERATORS.SUBSTRACTION && (!rightValue || rightValue === DIGITS.ZERO)
+            }
           >
             &minus;
           </IOSButtonOperator>
@@ -110,7 +114,9 @@ export const IOSCalculator = () => {
           <IOSButtonOperator
             value={OPERATORS.ADDITION}
             onClick={onOperatorClick}
-            isSelected={operator === OPERATORS.ADDITION && (!rightValue || rightValue === "0")}
+            isSelected={
+              operator === OPERATORS.ADDITION && (!rightValue || rightValue === DIGITS.ZERO)
+            }
           >
             &#x2b;
           </IOSButtonOperator>

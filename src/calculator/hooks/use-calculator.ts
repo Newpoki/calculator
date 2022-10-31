@@ -1,5 +1,6 @@
 import { SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
 import { isEventKeyOperator } from "../../utils/is-event-key-operator";
+import { DIGITS } from "../calculator-constants";
 import { Operator } from "../calculator-types";
 
 export const useCalculator = () => {
@@ -27,22 +28,22 @@ export const useCalculator = () => {
   }, []);
 
   const handleInvert = useCallback(() => {
-    const value = rightValue ?? leftValue ?? "0";
+    const value = rightValue ?? leftValue ?? DIGITS.ZERO;
 
-    // We can't just multiply by -1 because in JS, the number -0 is "0" when stringified
+    // We can't just multiply by -1 because in JS, the number -0 is DIGITS.ZERO when stringified
     const inverted = value.startsWith("-") ? value.slice(1) : `-${value}`;
 
     updateResult(inverted);
   }, [leftValue, rightValue, updateResult]);
 
   const handlePercent = useCallback(() => {
-    const value = `${Number(rightValue ?? leftValue ?? "0") / 100}`;
+    const value = `${Number(rightValue ?? leftValue ?? DIGITS.ZERO) / 100}`;
 
     updateResult(value);
   }, [leftValue, rightValue, updateResult]);
 
   const handleCancel = useCallback(() => {
-    const value = rightValue ?? leftValue ?? "0";
+    const value = rightValue ?? leftValue ?? DIGITS.ZERO;
 
     if (value?.length === 1) {
       return;
