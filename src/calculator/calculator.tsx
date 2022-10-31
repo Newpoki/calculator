@@ -26,13 +26,13 @@ export const Calculator = () => {
 
       <div className="calculator--buttons">
         <div className="calculator--buttons--row">
-          <ButtonTool value={TOOLS.RESET} onClick={onReset}>
+          <ButtonTool className="reset-button" value={TOOLS.RESET} onClick={onReset}>
             AC
           </ButtonTool>
-          <ButtonTool value={TOOLS.INVERT} onClick={onInvert}>
-            +/-
+          <ButtonTool className="invert-button" value={TOOLS.INVERT} onClick={onInvert}>
+            ⁺∕₋
           </ButtonTool>
-          <ButtonTool value={TOOLS.PERCENT} onClick={onPercent}>
+          <ButtonTool className="percent-button" value={TOOLS.PERCENT} onClick={onPercent}>
             %
           </ButtonTool>
           <ButtonOperation
@@ -40,7 +40,7 @@ export const Calculator = () => {
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.DIVISION}
           >
-            ÷
+            &#xf7;
           </ButtonOperation>
         </div>
 
@@ -55,11 +55,12 @@ export const Calculator = () => {
             9
           </ButtonDigit>
           <ButtonOperation
+            className="times-button"
             value={OPERATORS.MULTIPLICATION}
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.MULTIPLICATION}
           >
-            X
+            &#xd7;
           </ButtonOperation>
         </div>
 
@@ -78,7 +79,7 @@ export const Calculator = () => {
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.SUBSTRACTION}
           >
-            -
+            &minus;
           </ButtonOperation>
         </div>
 
@@ -97,7 +98,7 @@ export const Calculator = () => {
             onClick={onOperatorClick}
             isSelected={operator === OPERATORS.ADDITION}
           >
-            +
+            &#x2b;
           </ButtonOperation>
         </div>
 
@@ -108,7 +109,7 @@ export const Calculator = () => {
           <ButtonDigit value={DIGITS_WITH_SEP.SEP} onClick={onDigitClick}>
             ,
           </ButtonDigit>
-          <ButtonOperation onClick={onCalc}>=</ButtonOperation>
+          <ButtonOperation onClick={onCalc}>&#x3d;</ButtonOperation>
         </div>
       </div>
     </main>

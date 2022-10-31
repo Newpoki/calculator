@@ -7,6 +7,7 @@ $main-low-opacity: rgba(179, 144, 98, 1);
   background-color: $main;
   transition-duration: 0.3s;
   transition-property: background-color, color;
+  font-weight: bold;
 
   &.selected {
     background-color: $secondary;
