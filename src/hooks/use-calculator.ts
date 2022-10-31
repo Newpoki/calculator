@@ -54,19 +54,33 @@ export const useCalculator = () => {
   }, [leftValue, operator, rightValue, updateResult]);
 
   const handleInvert = useCallback(() => {
-    const valueToInvert = rightValue ?? leftValue ?? "0";
+    const value = rightValue ?? leftValue ?? "0";
 
     // We can't just multiply by -1 because in JS, the number -0 is "0" when stringified
-    const inverted = valueToInvert.startsWith("-") ? valueToInvert.slice(1) : `-${valueToInvert}`;
+    const inverted = value.startsWith("-") ? value.slice(1) : `-${value}`;
 
     updateResult(inverted);
   }, [leftValue, rightValue, updateResult]);
 
   const handlePercent = useCallback(() => {
-    const percent = `${Number(rightValue ?? leftValue ?? "0") / 100}`;
+    const value = `${Number(rightValue ?? leftValue ?? "0") / 100}`;
 
-    updateResult(percent);
+    updateResult(value);
   }, [leftValue, rightValue, updateResult]);
+
+  const handleCancel = useCallback(() => {
+    const value = rightValue ?? leftValue ?? "0";
+
+    if (value?.length === 1) {
+      return;
+    }
+
+    const getUpdatedValue = () => {
+      return value.slice(0, value.length - 1);
+    };
+
+    rightValue ? setRightValue(getUpdatedValue) : setLeftValue(getUpdatedValue);
+  }, [leftValue, rightValue]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -89,8 +103,12 @@ export const useCalculator = () => {
       if (event.key === "%") {
         handlePercent();
       }
+
+      if (event.key === "Backspace") {
+        handleCancel();
+      }
     },
-    [handleCalc, handleClickDigit, handleClickOperation, handlePercent, handleReset]
+    [handleCalc, handleCancel, handleClickDigit, handleClickOperation, handlePercent, handleReset]
   );
 
   useEffect(() => {
