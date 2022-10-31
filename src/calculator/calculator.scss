@@ -15,7 +15,18 @@
 
     &--result {
       color: white;
-      font-size: 90px;
+
+      &--normal {
+        font-size: 90px;
+      }
+
+      &--small {
+        font-size: 80px;
+      }
+
+      &--extra-small {
+        font-size: 70px;
+      }
     }
   }
 

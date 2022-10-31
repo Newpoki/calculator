@@ -1,8 +1,11 @@
+import clsx from "clsx";
+import { useCallback } from "react";
 import { useCalculator } from "../hooks/use-calculator";
 import { ButtonDigit } from "./button-digit";
 import { ButtonOperation } from "./button-operation";
 import { ButtonTool } from "./button-tool";
 import { DIGITS_WITH_SEP, OPERATORS, TOOLS } from "./calculator-constants";
+import { DigitWithSepValue } from "./calculator-types";
 
 import "./calculator.scss";
 
@@ -18,10 +21,30 @@ export const Calculator = () => {
     onPercent,
   } = useCalculator();
 
+  const handleDigitClick = useCallback(
+    (value: DigitWithSepValue) => {
+      // iOS calculator doesn't allow more than 9 chars
+      if (displayedValue.length === 9) {
+        return;
+      }
+
+      onDigitClick(value);
+    },
+    [displayedValue.length, onDigitClick]
+  );
+
   return (
     <main className="calculator">
       <div className="calculator--screen">
-        <p className="calculator--screen--result">{displayedValue}</p>
+        <p
+          className={clsx("calculator--screen--result", {
+            "calculator--screen--result--normal": displayedValue.length <= 7,
+            "calculator--screen--result--small": displayedValue.length === 8,
+            "calculator--screen--result--extra-small": displayedValue.length === 9,
+          })}
+        >
+          {displayedValue}
+        </p>
       </div>
 
       <div className="calculator--buttons">
@@ -45,13 +68,13 @@ export const Calculator = () => {
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.SEVEN} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.SEVEN} onClick={handleDigitClick}>
             7
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.HEIGHT} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.HEIGHT} onClick={handleDigitClick}>
             8
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.NINE} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.NINE} onClick={handleDigitClick}>
             9
           </ButtonDigit>
           <ButtonOperation
@@ -65,13 +88,13 @@ export const Calculator = () => {
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.FOUR} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.FOUR} onClick={handleDigitClick}>
             4
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.FIVE} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.FIVE} onClick={handleDigitClick}>
             5
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.SIX} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.SIX} onClick={handleDigitClick}>
             6
           </ButtonDigit>
           <ButtonOperation
@@ -84,13 +107,13 @@ export const Calculator = () => {
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.ONE} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.ONE} onClick={handleDigitClick}>
             1
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.TWO} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.TWO} onClick={handleDigitClick}>
             2
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.THREE} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.THREE} onClick={handleDigitClick}>
             3
           </ButtonDigit>
           <ButtonOperation
@@ -103,10 +126,10 @@ export const Calculator = () => {
         </div>
 
         <div className="calculator--buttons--row">
-          <ButtonDigit value={DIGITS_WITH_SEP.ZERO} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.ZERO} onClick={handleDigitClick}>
             0
           </ButtonDigit>
-          <ButtonDigit value={DIGITS_WITH_SEP.SEP} onClick={onDigitClick}>
+          <ButtonDigit value={DIGITS_WITH_SEP.SEP} onClick={handleDigitClick}>
             ,
           </ButtonDigit>
           <ButtonOperation onClick={onCalc}>&#x3d;</ButtonOperation>

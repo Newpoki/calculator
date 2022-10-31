@@ -10,7 +10,7 @@ export const useCalculator = () => {
   const [operator, setOperator] = useState<Operation | undefined>(undefined);
 
   const displayedValue = useMemo(() => {
-    return rightValue ?? leftValue ?? 0;
+    return rightValue ?? leftValue ?? "0";
   }, [leftValue, rightValue]);
 
   const handleClickDigit = useCallback(
