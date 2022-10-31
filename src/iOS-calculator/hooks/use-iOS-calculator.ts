@@ -25,7 +25,8 @@ export const useIOSCalculator = () => {
   const [resetButtonLabel, setResetButtonLabel] = useState(IOS_RESET_BUTTON_LABEL.AC);
 
   const displayedValue = useMemo(() => {
-    return rightValue ?? leftValue ?? "0";
+    // Even if user inputs ",", this is converted to a number in the way
+    return (rightValue ?? leftValue ?? "0").replace(".", DIGIT_SEP);
   }, [leftValue, rightValue]);
 
   const handleDigitClick = useCallback(
@@ -36,7 +37,6 @@ export const useIOSCalculator = () => {
       }
 
       const getUpdatedDigitValue = (current: string | undefined) => {
-        console.log({ current, value });
         return !current || current === "0" ? value : `${current}${value}`;
       };
 
